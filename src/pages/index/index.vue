@@ -1,18 +1,18 @@
 <template>
   <view class="container">
     <view class="header">
-      <text class="title">尤伦斯当代艺术中心</text>
+      <text class="title">{{ product.title }}</text>
       <view class="menu">
         <text>...</text>
         <image src="/static/icon/more.png" class="icon"></image>
       </view>
     </view>
     <view class="content">
-      <image src="/static/images/exhibition.png" class="exhibition-image"></image>
+      <image :src="product.image" class="exhibition-image"></image>
       <view class="info">
-        <text class="chinese-title">沉睡者的抵抗</text>
+        <text class="chinese-title">{{ product.description }}</text>
         <text class="english-title">Resistance of the Sleepers</text>
-        <text class="date">2023.4.30 - 2023.9.6</text>
+        <text class="date">{{ product.date }}</text>
       </view>
     </view>
     <view class="buttons">
@@ -31,6 +31,34 @@
     </view>
   </view>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      product: {}
+    };
+  },
+  onLoad() {
+    this.getProductInfo();
+  },
+  methods: {
+    getProductInfo() {
+      uni.request({
+        url: 'http://localhost:3000/api/products', // 请确保端口和URL正确
+        success: (res) => {
+          if (res.statusCode === 200) {
+            this.product = res.data[0]; // 假设只返回一个产品
+          }
+        },
+        fail: (err) => {
+          console.error(err);
+        }
+      });
+    }
+  }
+};
+</script>
 
 <style>
 @tailwind base;
