@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <view class="header">
-      <text class="title">{{ product.title }}</text>
+      <text class="title">{{ product.name }}</text>
       <view class="menu">
         <text>...</text>
         <image src="/static/icon/more.png" class="icon"></image>
@@ -10,7 +10,7 @@
     <view class="content">
       <image :src="product.image" class="exhibition-image"></image>
       <view class="info">
-        <text class="chinese-title">{{ product.description }}</text>
+        <text class="chinese-title">广丽塑胶</text>
         <text class="english-title">Resistance of the Sleepers</text>
         <text class="date">{{ product.date }}</text>
       </view>
@@ -33,29 +33,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      product: {}
+      product: {
+        name: '',
+        image: '',
+        date: ''
+      }
     };
   },
-  onLoad() {
-    this.getProductInfo();
-  },
   methods: {
-    getProductInfo() {
-      uni.request({
-        url: 'http://localhost:3000/api/products', // 请确保端口和URL正确
-        success: (res) => {
-          if (res.statusCode === 200) {
-            this.product = res.data[0]; // 假设只返回一个产品
-          }
-        },
-        fail: (err) => {
-          console.error(err);
-        }
-      });
+    async fetchProduct() {
+      try {
+        const response = await axios.get('https://your-vercel-app.vercel.app/products');
+        this.product = response.data[0]; // 假设我们只取第一个产品的数据
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
     }
+  },
+  created() {
+    this.fetchProduct();
   }
 };
 </script>

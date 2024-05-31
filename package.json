@@ -54,6 +54,7 @@
     "@dcloudio/uni-mp-weixin": "^0.0.973",
     "@dcloudio/uni-mp-xhs": "3.0.0-4010520240507001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4010520240507001",
+    "axios": "^1.7.2",
     "express": "^4.19.2",
     "mongoose": "^8.4.0",
     "vue": "^3.4.21",
