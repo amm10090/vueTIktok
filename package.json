@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "scripts": {
     "tailwind-dev": "tailwindcss -i ./tailwind-input.css -o ./static/tailwind.css --watch",
-    "start": "node api/server.js",
     "tailwind-build": "tailwindcss -i ./tailwind-input.css -o ./static/tailwind.css",
     "postinstall": "weapp-tw patch",
     "dev:app": "uni -p app",
